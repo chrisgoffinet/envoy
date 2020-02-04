@@ -127,7 +127,7 @@ void DnsResolverImpl::PendingResolution::onAresGetAddrInfoCallback(int status, i
   }
 
   if (completed_) {
-    if (!cancelled_) {
+    if (!cancelled_ && status == ARES_SUCCESS) {
       try {
         callback_(std::move(address_list));
       } catch (const EnvoyException& e) {
